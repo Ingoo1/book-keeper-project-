@@ -39,6 +39,24 @@ function validate(nameValue, urlValue) {
   return true;
 }
 
+// Fetch bookmarks
+function fetchBookmarks() {
+  // Get bookmarks from localStorage if available
+  if (localStorage.getItem('bookmarks')) {
+    bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+  } else {
+    // Create bookmarks array in localStorage
+    bookmarks = [
+      {
+        name: 'Google',
+        url: 'https://google.com',
+      },
+    ];
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+  }
+  // buildBookmarks();
+}
+
 function storeBookmark(e) {
   e.preventDefault();
   const nameValue = websiteNameEl.value;
@@ -57,8 +75,16 @@ function storeBookmark(e) {
     url: urlValue,
   };
   bookmarks.push(bookmark);
+
+  console.log(bookmarks);
+
   // Set bookmarks in localStorage, fetch, reset input fields
   localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+  fetchBookmarks();
+  bookmarkForm.reset();
+  websiteNameEl.focus();
 }
 
 bookmarkForm.addEventListener('submit', storeBookmark);
+
+fetchBookmarks();
