@@ -4,7 +4,7 @@
 
 Used links:
 
-1. []()
+1. [Hero Patterns](https://heropatterns.com/)
 2. []()
 3. []()
 4. []()
